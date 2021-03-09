@@ -20,9 +20,13 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Totuus1157 All Rights Reserved.
+      <Link
+        color="inherit"
+        href="https://github.com/totuus1157/20th-synthesizers-gallery"
+      >
+        Totuus1157
       </Link>{" "}
+      {"All Rights Reserved."}
       {new Date().getFullYear()}
       {"."}
     </Typography>
@@ -65,7 +69,11 @@ const App: React.FC = () => {
   const classes = useStyles();
 
   const modelList = [
-    { name: "MOOG minimoog", image: "minimoog.jpg" },
+    {
+      name: "MOOG minimoog",
+      image: "minimoog.jpg",
+      movie: `<iframe width="560" height="315" src="https://www.youtube.com/embed/2xsHN3NTyk0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`,
+    },
     { name: "ARP Odyssey", image: "odyssey.jpg" },
     { name: "SCI Prophet-5", image: "prophet5.jpg" },
     { name: "Oberheim OB-8", image: "ob8.jpg" },
