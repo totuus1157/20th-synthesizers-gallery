@@ -76,11 +76,6 @@ const App: React.FC = (): JSX.Element => {
   const [selectedId, setSelectedId] = useState(1);
   const [open, setOpen] = useState(false);
 
-  const handleOpen = (id: number): void => {
-    setSelectedId(id);
-    setOpen(true);
-  };
-
   const handleClose = (): void => {
     setOpen(false);
   };
