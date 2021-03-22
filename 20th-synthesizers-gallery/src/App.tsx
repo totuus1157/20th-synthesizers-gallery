@@ -18,6 +18,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import Hidden from "@material-ui/core/Hidden";
 import "fontsource-roboto";
 import Copyright from "./Copyright";
 
@@ -273,7 +274,11 @@ const App: React.FC = (): JSX.Element => {
               color="textSecondary"
               paragraph
             >
-              ２０世紀音楽シーンを彩ったシンセサイザーの名機たち
+              ２０世紀音楽シーンを彩った
+              <Hidden smUp>
+                <br />
+              </Hidden>
+              シンセサイザーの名機たち
             </Typography>
           </Container>
         </div>
