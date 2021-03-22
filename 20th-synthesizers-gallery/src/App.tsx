@@ -15,6 +15,13 @@ import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
 import Modal from "@material-ui/core/Modal";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
 import ReactPlayer from "react-player/youtube";
 import "fontsource-roboto";
 import Copyright from "./Copyright";
@@ -59,6 +66,9 @@ const useStyles = makeStyles((theme: Theme) =>
       boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 4, 3),
     },
+    table: {
+      minWidth: 150,
+    },
     footer: {
       backgroundColor: theme.palette.background.paper,
       padding: theme.spacing(6),
@@ -88,7 +98,7 @@ const App: React.FC = (): JSX.Element => {
     price: string;
     dateProduced: string;
     oscillatorType: string;
-    Polyphony: string;
+    polyphony: string;
     description: string;
   }
 
@@ -101,7 +111,7 @@ const App: React.FC = (): JSX.Element => {
       price: "495,000",
       dateProduced: "1970",
       oscillatorType: "アナログ(VCO)",
-      Polyphony: "1",
+      polyphony: "1",
       description:
         "史上初の鍵盤一体型コンパクトモデル。シンセサイザーは研究室からロックのステージへとその活躍の幅を広げた。出音の圧倒的な図太さは現在に至るまでも他の追随を許さず。今でもシンセベースと言えば真っ先に候補に挙がる。名実共にアナログシンセの王。",
     },
@@ -113,7 +123,7 @@ const App: React.FC = (): JSX.Element => {
       price: "470,000",
       dateProduced: "1972",
       oscillatorType: "アナログ(VCO)",
-      Polyphony: "1",
+      polyphony: "1",
       description:
         "minimoogの永遠のライバル。音の傾向もデザインも何から何まで正反対。得られるサウンドの幅広さとピッチの安定性はコチラの方が上。小さなボディに似合わず多数の機能を搭載し、効果音の作成も大得意。テクノやるなら迷わずこのモデル。",
     },
@@ -125,7 +135,7 @@ const App: React.FC = (): JSX.Element => {
       price: "1,700,000",
       dateProduced: "1978",
       oscillatorType: "アナログ(VCO)",
-      Polyphony: "5",
+      polyphony: "5",
       description:
         "過去から現在に至るまで、アナログ・ポリフォニックシンセと言えばまずこのモデル。音良し機能良し操作性良しでビンテージシンセ界での人気は不動のNo.1。rev.3のリリースから40年、まさかのアップデート版rev.4が発売された。",
     },
@@ -137,7 +147,7 @@ const App: React.FC = (): JSX.Element => {
       price: "1,380,000",
       dateProduced: "1983",
       oscillatorType: "アナログ(VCO)",
-      Polyphony: "8",
+      polyphony: "8",
       description:
         "Prophet5対抗モデル「OB」シリーズの最終版にして、Van Halenの「Jump」で有名な「OB-Xa(1981)」の後継機。回路の全面的な見直しにより安定性は増すも、音の荒々しさは幾分後退した感。もっともMIDI搭載で現在の音楽制作環境にも組み込めるのは利点か。",
     },
@@ -149,7 +159,7 @@ const App: React.FC = (): JSX.Element => {
       price: "490,000",
       dateProduced: "1983",
       oscillatorType: "アナログ(VCO)",
-      Polyphony: "6",
+      polyphony: "6",
       description:
         "世界に日本メーカーの存在を認めさせたROLANDアナログシンセの最高峰「JUPITER-8(1981)」の弟分。同時発音数は2つ減るも、独特の音の厚みは健在。MIDIを標準搭載しているので、現在の音楽制作環境にもそのまま組み込むことができる。",
     },
@@ -161,7 +171,7 @@ const App: React.FC = (): JSX.Element => {
       price: "998,000",
       dateProduced: "1985",
       oscillatorType: "アナログ(VCO)",
-      Polyphony: "12",
+      polyphony: "12",
       description:
         "アメリカ4大メーカー「Oberheim」の最後の輝き。シンセ二台分をマイクロプロセッサでコントロールする事により、巨大なモジュラーシンセに匹敵する複雑な音作りを可能にした、まさに「アナログ・モンスター」。シンセ界のロールスロイス。",
     },
@@ -173,7 +183,7 @@ const App: React.FC = (): JSX.Element => {
       price: "258,000",
       dateProduced: "1986",
       oscillatorType: "デジタル(FM)",
-      Polyphony: "16",
+      polyphony: "16",
       description:
         "本格的なデジタルシンセサイザー時代の到来を告げた歴史的名機「DX7(1983)」の後継機。FM音源が生み出すメタリックかつプラスティッキーなサウンドは、それまでのアナログシンセとは180°異なるものだった。中でもエレピサウンドは80年代を象徴するアイコン。",
     },
@@ -185,7 +195,7 @@ const App: React.FC = (): JSX.Element => {
       price: "238,000",
       dateProduced: "1987",
       oscillatorType: "デジタル(LA)",
-      Polyphony: "16",
+      polyphony: "16",
       description:
         "DX7に対抗して生み出されたROLAND初のフルデジタルシンセ。限られたメモリ容量の中で最大限リアルなサウンドを実現するべく、サンプリング音の短い破片とオシレータ音を合成したLA音源を搭載。FM音源よりも分かりやすいデジタルシンセシスを提示した。",
     },
@@ -197,7 +207,7 @@ const App: React.FC = (): JSX.Element => {
       price: "248,000",
       dateProduced: "1988",
       oscillatorType: "デジタル(PCM)",
-      Polyphony: "16",
+      polyphony: "16",
       description:
         "80年代中期、不振にあえいだKORGの劇的な大復活作。メモリの低価格化により完全なPCM音源の搭載を遂に実現。更にエフェクタとシーケンサまでも内蔵、一台で音楽制作が完結する「ワークステーションシンセ」の走りとなり、世界中で大ヒットした。",
     },
@@ -209,7 +219,7 @@ const App: React.FC = (): JSX.Element => {
       price: "420,000",
       dateProduced: "1991",
       oscillatorType: "デジタル(FM & PCM)",
-      Polyphony: "32",
+      polyphony: "32",
       description:
         "重機関車のごとき堂々たる威容を誇る、ワークステーションの旗艦モデル。YAMAHAお得意のFM音源に加えPCM音源も装備した、まさに死角無しの万能機。開発者はかつて「21世紀まで通用する音色を目指した」と語ったが、その実力は30年を経た現在でも立派に通用する。",
     },
@@ -221,7 +231,7 @@ const App: React.FC = (): JSX.Element => {
       price: "220,000",
       dateProduced: "1991",
       oscillatorType: "デジタル(PCM)",
-      Polyphony: "32",
+      polyphony: "32",
       description:
         "SCIが「ProphetVS(1986)」のリリースを最後に倒産した後、一部のスタッフがKORGに移籍し開発したのが「Wavestation(1990)」。メモリ内のサンプル波形を連続的に読み出しダイナミックな音色変化を生み出すWave sequence機能を搭載。EXはメモリが倍に拡張されている強化版。",
     },
@@ -233,7 +243,7 @@ const App: React.FC = (): JSX.Element => {
       price: "470,000",
       dateProduced: "1993",
       oscillatorType: "デジタル(VA)",
-      Polyphony: "2",
+      polyphony: "2",
       description:
         "PCM音源が世を席巻し技術的な閉塞感も漂っていた頃、颯爽と登場したパラダイムシフター。プロセッサの高速演算により仮想楽器をモデリングし発音するという「バーチャル・アコースティック音源」を搭載、サンプリングでは絶対に不可能な音色変化を可能とした。",
     },
@@ -326,7 +336,47 @@ const App: React.FC = (): JSX.Element => {
                 src={targetModel.videoUrl}
               />
               <h2 id="simple-modal-title">{targetModel.name}</h2>
-              <p id="simple-modal-description">{targetModel.videoUrl}</p>
+              <TableContainer component={Paper}>
+                <Table
+                  className={classes.table}
+                  size="small"
+                  aria-label="a dense table"
+                >
+                  <TableBody>
+                    <TableRow key={targetModel.id}>
+                      <TableCell component="th" scope="row">
+                        価格（円）
+                      </TableCell>
+                      <TableCell align="right">{targetModel.price}</TableCell>
+                    </TableRow>
+                    <TableRow key={targetModel.id}>
+                      <TableCell component="th" scope="row">
+                        発売年
+                      </TableCell>
+                      <TableCell align="right">
+                        {targetModel.dateProduced}
+                      </TableCell>
+                    </TableRow>
+                    <TableRow key={targetModel.id}>
+                      <TableCell component="th" scope="row">
+                        音源方式
+                      </TableCell>
+                      <TableCell align="right">
+                        {targetModel.oscillatorType}
+                      </TableCell>
+                    </TableRow>
+                    <TableRow key={targetModel.id}>
+                      <TableCell component="th" scope="row">
+                        同時発音数
+                      </TableCell>
+                      <TableCell align="right">
+                        {targetModel.polyphony}
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </TableContainer>
+              <p id="simple-modal-description">{targetModel.description}</p>
             </div>
           </Modal>
         </Container>
