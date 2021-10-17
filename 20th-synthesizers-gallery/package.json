@@ -1,7 +1,7 @@
 {
   "name": "20th-synthesizers-gallery",
   "version": "0.1.0",
-  "homepage":"https://totuus1157.github.io/20th-synthesizers-gallery/",
+  "homepage": "https://totuus1157.github.io/20th-synthesizers-gallery/",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.3",
