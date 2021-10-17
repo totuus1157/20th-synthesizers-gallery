@@ -9,3 +9,6 @@ https://totuus1157.github.io/20th-synthesizers-gallery/
 
 ## デプロイ方法
 `docker-compose run --rm node npm run deploy`
+
+## TODO
+- コンポーネント分割
